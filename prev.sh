@@ -20,7 +20,7 @@ prev() {
     [[ "${@}" ]] && subscript="" # if run with argument, start over
     [[ -z "${subscript}" ]] && { inputarray=("${@}"); subscript="-1"; statenext="-1"; } # first run
 
-    if [[ ! "${@}" && ${runcount2} == "0" && ${statenext} -le ${#inputarray[@]} ]]; then # every first run without argument given
+    if [[ ! "${@}" && ${runcount2} == "0" ]]; then # every first run without argument given
 	(( statenext -= 2 )); (( subscript -= 2 ))
     fi
 
