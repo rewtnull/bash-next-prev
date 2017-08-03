@@ -20,9 +20,9 @@ next() {
     [[ "${@}" ]] && subscript="" # if run with argument, start over
     [[ -z "${subscript}" ]] && { inputarray=("${@}"); subscript="0"; } # first run
 
-		[[ ! "${@}" && ${runcount1} == "0" ]] && { (( statenext += 2 )); (( subscript += 2 )); } # every first run without argument given
+    [[ ! "${@}" && ${runcount1} == "0" ]] && { (( statenext += 2 )); (( subscript += 2 )); } # every first run without argument given
 
-		[[ ${statenext} -ge ${#inputarray[@]} ]] && { statenext="0"; subscript="0"; } # when reaching the end, jump to beginning
+    [[ ${statenext} -ge ${#inputarray[@]} ]] && { statenext="0"; subscript="0"; } # when reaching the end, jump to beginning
     [[ ${statenext} -eq "" ]] && statenext="0"
 
     for (( x = ${subscript}; x < ${#inputarray[@]}; x++ )); do
