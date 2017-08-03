@@ -6,7 +6,7 @@ next(${array[@]})
 	For each function call, returns the next element from input array and wraps to the beginning of array when
 	reaching the end.
 	
-	Inspired by the python .next( method.
+	Inspired by the python .next() method.
 	
 	Uses five global variables: runcount1, runcount2, statenext, subscript, inputarray
 	- Globals are exchanged between next() and prev() functions
