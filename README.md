@@ -63,3 +63,22 @@ USAGE
 	prev                # a b c d <e> f (prev)
 	prev                # a b c <d> e f (prev)
 
+
+AUTHOR
+
+	Written by Marcus Hoffren
+
+REPORTING BUGS
+
+	Report gch.sh bugs to marcus@harikazen.com
+	Updates of gch.sh and other projects of mine can be found at
+	https://github.com/rewtnull?tab=repositories
+
+COPYRIGHT
+
+	Copyright © 2017 Marcus Hoffren. License GPLv3+:
+	GNU GPL version 3 or later - http://gnu.org/licenses/gpl.html
+
+	This is free software: you are free to change and redistribute it.
+	There is NO WARRANTY, to the extent permitted by law.
+
