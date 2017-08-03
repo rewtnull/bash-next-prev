@@ -26,10 +26,9 @@ USAGE
 	prev                # a b <c> d e f (prev)
 	prev                # a <b> c d e f (prev)
 	prev                # <a> b c d e f (prev)
+	prev                # a b c d e <f> (prev)
+	next                # <a> b c d e f (next)
 	next                # a <b> c d e f (next)
-	next                # a b <c> d e f (next)
-
-
 
 prev(${array[@]})
 
@@ -56,9 +55,9 @@ USAGE
 	next                # a b c <d> e f (next)
 	next                # a b c d <e> f (next)
 	next                # a b c d e <f> (next)
+	next                # <a> b c d e f (next)
+	prev                # a b c d e <f> (prev)
 	prev                # a b c d <e> f (prev)
-	prev                # a b c <d> e f (prev)
-
 
 AUTHOR
 
