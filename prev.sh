@@ -25,7 +25,7 @@ prev() {
     [[ ${statenext} -lt -${#inputarray[@]} ]] && { statenext="-1"; subscript="-1"; } # when reaching the end, jump to beginning
     [[ ${statenext} -eq "" ]] && statenext="-1"
 
-    for (( x = ${#inputarray[@]}; ${#inputarray[@]} > ${subscript}; x-- )); do
+    for (( x = ${#inputarray[@]}; x > ${subscript}; x-- )); do
 	element="${inputarray[${subscript}]}"
 	break
     done
