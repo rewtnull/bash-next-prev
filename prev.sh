@@ -22,7 +22,7 @@ prev() {
 
     [[ ! "${@}" && ${runcount2} == "0" ]] && { (( statenext -= 2 )); (( subscript -= 2 )); } # every first run without argument given
 
-    [[ ${statenext} -lt -${#inputarray[@]} ]] && { statenext="-1"; subscript="-1"; } # when reaching the end, jump to beginning
+    [[ ${statenext} -lt -${#inputarray[@]} ]] && { statenext="-1"; subscript="-1"; } # when reaching the beginning, jump to the end
     [[ ${statenext} -eq "" ]] && statenext="-1"
 
     for (( x = ${#inputarray[@]}; x > ${subscript}; x-- )); do
