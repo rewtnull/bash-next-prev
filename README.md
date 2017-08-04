@@ -30,6 +30,11 @@ USAGE
 	next                # <a> b c d e f (next)
 	next                # a <b> c d e f (next)
 
+	If you want to run tests against the output, you can comment out line 33 (echo -e ...), and
+	reassign the local variable ${element} like so: output="${element}" instead. The reason for
+	this is because trying something like: foo="$(next)"; [[ ${foo} != "bar" ]] ... will force
+	next() to run in a subshell, and thus will not yield the wanted results.
+
 prev(${array[@]})
 
 	For each function call, returns the previous element from input array and wraps to the end of array when
@@ -58,6 +63,11 @@ USAGE
 	next                # <a> b c d e f (next)
 	prev                # a b c d e <f> (prev)
 	prev                # a b c d <e> f (prev)
+
+	If you want to run tests against the output, you can comment out line 33 (echo -e ...), and
+	reassign the local variable ${element} like so: output="${element}" instead. The reason for
+	this is because trying something like: foo="$(prev)"; [[ ${foo} != "bar" ]] ... will force
+	prev() to run in a subshell, and thus will not yield the wanted results.
 
 AUTHOR
 
