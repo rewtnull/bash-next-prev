@@ -129,11 +129,7 @@ AUTHOR
 
 	Written by Marcus Hoffren
 
-REPORTING BUGS
-
-	Report gch.sh bugs to marcus@harikazen.com
-	Updates of gch.sh and other projects of mine can be found at
-	https://github.com/rewtnull?tab=repositories
+	Other projects of mine can be found at https://github.com/rewtnull?tab=repositories
 
 COPYRIGHT
 
