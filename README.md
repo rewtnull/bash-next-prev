@@ -63,6 +63,15 @@ USAGE
 	echo "${output}"	# c
 	...
 
+	Or even:
+	
+	next "${alpha[@]}"
+	next
+	next
+	next
+	next
+	echo "${output}"	# e
+
 prev(${array[@]})
 
 	For each function call, returns the previous element from input array and wraps to the end of array when
@@ -124,6 +133,15 @@ USAGE
 	prev
 	echo "${output}"	# d
 	...
+
+	Or even:
+	
+	prev "${alpha[@]}"
+	prev
+	prev
+	prev
+	prev
+	echo "${output}"	# b
 
 AUTHOR
 
