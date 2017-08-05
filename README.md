@@ -33,7 +33,21 @@ USAGE
 	If you want to run tests against the output, you can comment out line 33 (echo -e ...), and
 	reassign the local variable ${element} like so: output="${element}" instead. The reason for
 	this is because trying something like: foo="$(next)"; [[ ${foo} != "bar" ]] ... will force
-	next() to run in a subshell, and thus will not yield the wanted results.
+	next() to run in a subshell, and thus will not yield the wanted results. After doing the 
+	above changes you can do this:
+	
+	alpha=("a" "b" "c" "d" "e" "f") # initiate array
+
+	next "${alpha[@]}" # first run outside of loop
+
+	for (( i = 0; i < ${#alpha[@]}; i++ )); do
+    		if [[ "${output}" == "d" ]]; then
+			echo "Output is ${output}!"
+		else
+			echo -e "${output}"
+		fi
+    		next
+	done
 
 prev(${array[@]})
 
@@ -67,7 +81,21 @@ USAGE
 	If you want to run tests against the output, you can comment out line 33 (echo -e ...), and
 	reassign the local variable ${element} like so: output="${element}" instead. The reason for
 	this is because trying something like: foo="$(prev)"; [[ ${foo} != "bar" ]] ... will force
-	prev() to run in a subshell, and thus will not yield the wanted results.
+	prev() to run in a subshell, and thus will not yield the wanted results. After doing the 
+	above changes you can do this:
+	
+	alpha=("a" "b" "c" "d" "e" "f") # initiate array
+
+	prev "${alpha[@]}" # first run outside of loop
+
+	for (( i = 0; i < ${#alpha[@]}; i++ )); do
+    		if [[ "${output}" == "d" ]]; then
+			echo "Output is ${output}!"
+		else
+			echo -e "${output}"
+		fi
+    		prev
+	done
 
 AUTHOR
 
