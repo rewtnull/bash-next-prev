@@ -41,12 +41,13 @@ USAGE
 	next "${alpha[@]}" # first run outside of loop
 
 	for (( i = 0; i < ${#alpha[@]}; i++ )); do
-    		if [[ "${output}" == "d" ]]; then
+		if [[ "${output}" == "d" ]]; then
 			echo "Output is ${output}!"
 		else
 			echo -e "${output}"
 		fi
-    		next
+
+		next
 	done
 
 prev(${array[@]})
@@ -89,12 +90,13 @@ USAGE
 	prev "${alpha[@]}" # first run outside of loop
 
 	for (( i = 0; i < ${#alpha[@]}; i++ )); do
-    		if [[ "${output}" == "d" ]]; then
+		if [[ "${output}" == "d" ]]; then
 			echo "Output is ${output}!"
 		else
 			echo -e "${output}"
 		fi
-    		prev
+
+		prev
 	done
 
 AUTHOR
