@@ -33,8 +33,9 @@ USAGE
 	If you want to run tests against the output, you can comment out line 33 (echo -e ...), and
 	reassign the local variable ${element} like so: output="${element}" instead. The reason for
 	this is because trying something like: foo="$(next)"; [[ ${foo} != "bar" ]] ... will force
-	next() to run in a subshell, and thus will not yield the wanted results. After doing the 
-	above changes you can do this:
+	next() to run in a subshell, and thus will not yield the wanted results.
+	
+	After doing the above changes you can do this:
 	
 	alpha=("a" "b" "c" "d" "e" "f") # initiate array
 
@@ -49,6 +50,18 @@ USAGE
 
 		next
 	done
+
+	You can also do this:
+	
+	alpha=("a" "b" "c" "d" "e" "f") # initiate array
+
+	next "${alpha[@]}"
+	echo "${output}"	# a
+	next
+	echo "${output}"	# b
+	next
+	echo "${output}"	# c
+	...
 
 prev(${array[@]})
 
@@ -82,8 +95,9 @@ USAGE
 	If you want to run tests against the output, you can comment out line 33 (echo -e ...), and
 	reassign the local variable ${element} like so: output="${element}" instead. The reason for
 	this is because trying something like: foo="$(prev)"; [[ ${foo} != "bar" ]] ... will force
-	prev() to run in a subshell, and thus will not yield the wanted results. After doing the 
-	above changes you can do this:
+	prev() to run in a subshell, and thus will not yield the wanted results.
+	
+	After doing the above changes you can do this:
 	
 	alpha=("a" "b" "c" "d" "e" "f") # initiate array
 
@@ -98,6 +112,18 @@ USAGE
 
 		prev
 	done
+
+	You can also do this:
+	
+	alpha=("a" "b" "c" "d" "e" "f") # initiate array
+
+	prev "${alpha[@]}"
+	echo "${output}"	# f
+	prev
+	echo "${output}"	# e
+	prev
+	echo "${output}"	# d
+	...
 
 AUTHOR
 
