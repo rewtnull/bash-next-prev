@@ -78,7 +78,7 @@ USAGE
 	run="0"
 
 	for (( i = 0; i < ${#alpha[@]}; i++ )); do
-    		for (( j = 0; j < ${#alpha[@]}; j++ )); do
+		for (( j = 0; j < ${#alpha[@]}; j++ )); do
 			if [[ ${run} == "0" ]]; then
 				next "${alpha[@]}"
 				echo -n "${output} "
@@ -180,7 +180,7 @@ USAGE
 	run="0"
 
 	for (( i = 0; i < ${#alpha[@]}; i++ )); do
-    		for (( j = 0; j < ${#alpha[@]}; j++ )); do
+		for (( j = 0; j < ${#alpha[@]}; j++ )); do
 			if [[ ${run} == "0" ]]; then
 				prev "${alpha[@]}"
 				echo -n "${output} "
