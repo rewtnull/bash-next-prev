@@ -72,6 +72,37 @@ USAGE
 	next
 	echo "${output}"	# e
 
+	You could also do something a bit more complex such as:
+
+	alpha=("a" "b" "c" "d" "e" "f" "g" "h")
+	run="0"
+
+	for (( i = 0; i < ${#alpha[@]}; i++ )); do
+    		for (( j = 0; j < ${#alpha[@]}; j++ )); do
+			if [[ ${run} == "0" ]]; then
+				next "${alpha[@]}"
+				echo -n "${output} "
+				run="1"
+			else
+				next
+				echo -n "${output} "
+			fi
+		done
+		next
+		echo ""
+	done
+
+	which would output:
+
+	a b c d e f g h 
+	b c d e f g h a 
+	c d e f g h a b 
+	d e f g h a b c 
+	e f g h a b c d 
+	f g h a b c d e 
+	g h a b c d e f 
+	h a b c d e f g
+
 prev(${array[@]})
 
 	For each function call, returns the previous element from input array and wraps to the end of array when
@@ -142,6 +173,37 @@ USAGE
 	prev
 	prev
 	echo "${output}"	# b
+
+	You could also do something a bit more complex such as:
+
+	alpha=("a" "b" "c" "d" "e" "f" "g" "h")
+	run="0"
+
+	for (( i = 0; i < ${#alpha[@]}; i++ )); do
+    		for (( j = 0; j < ${#alpha[@]}; j++ )); do
+			if [[ ${run} == "0" ]]; then
+				prev "${alpha[@]}"
+				echo -n "${output} "
+				run="1"
+			else
+				prev
+				echo -n "${output} "
+			fi
+		done
+		prev
+		echo ""
+	done
+
+	which would output:
+
+	h g f e d c b a 
+	g f e d c b a h 
+	f e d c b a h g 
+	e d c b a h g f 
+	d c b a h g f e 
+	c b a h g f e d 
+	b a h g f e d c 
+	a h g f e d c b
 
 AUTHOR
 
