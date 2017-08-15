@@ -1,5 +1,5 @@
 #
-# prev(${array[@]})
+# prev(array) => ${output}
 #
 # Copyright (C) 2017 Marcus Hoffren <marcus@harikazen.com>.
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
@@ -30,7 +30,8 @@ prev() {
 	break
     done
 
-    echo -e "\e[91m${element}\e[0m"
+#    echo -e "\e[91m${element}\e[0m"
+    output="${element}"
 
     (( subscript -= 1 ))
 

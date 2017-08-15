@@ -1,10 +1,9 @@
 # bash-next-prev
 next() and prev() functions in bash inspired by the python .next() method
 
-next(${array[@]})
+next(array) => ${output}
 
-	For each function call, returns the next element from input array and wraps to the beginning of array when
-	reaching the end.
+	For each function call, returns the next element from input array and wraps to the beginning of array when reaching the end.
 
 	Uses five global variables: runcount1, runcount2, statenext, subscript, inputarray
 	- Globals are exchanged between next() and prev() functions
@@ -13,54 +12,52 @@ USAGE
 
 	alpha=("a" "b" "c" "d" "e" "f") # initiate array
 
-	next "${alpha[@]}"  # <a> b c d e f (first run)
-	next                # a <b> c d e f (next)
-	next                # a b <c> d e f (next)
-	next                # a b c <d> e f (next)
-	next                # a b c d <e> f (next)
-	next                # a b c d e <f> (next)
-	next                # <a> b c d e f (next)
-	next                # a <b> c d e f (next)
-	next                # a b <c> d e f (next)
-	next                # a b c <d> e f (next)
-	prev                # a b <c> d e f (prev)
-	prev                # a <b> c d e f (prev)
-	prev                # <a> b c d e f (prev)
-	prev                # a b c d e <f> (prev)
-	next                # <a> b c d e f (next)
-	next                # a <b> c d e f (next)
+	next "${alpha[@]}"; echo "${output}" # <a> b c d e f (first run)
+	next; echo "${output}"               # a <b> c d e f (next)
+	next; echo "${output}"               # a b <c> d e f (next)
+	next; echo "${output}"               # a b c <d> e f (next)
+	next; echo "${output}"               # a b c d <e> f (next)
+	next; echo "${output}"               # a b c d e <f> (next)
+	next; echo "${output}"               # <a> b c d e f (next)
+	next; echo "${output}"               # a <b> c d e f (next)
+	next; echo "${output}"               # a b <c> d e f (next)
+	next; echo "${output}"               # a b c <d> e f (next)
+	prev; echo "${output}"               # a b <c> d e f (prev)
+	prev; echo "${output}"               # a <b> c d e f (prev)
+	prev; echo "${output}"               # <a> b c d e f (prev)
+	prev; echo "${output}"               # a b c d e <f> (prev)
+	next; echo "${output}"               # <a> b c d e f (next)
+	next; echo "${output}"               # a <b> c d e f (next)
 
-	If you want to run tests against the output, you can change line 33 (echo -e ...) to:
-	output="${element}" instead. The reason for this is because trying something like:
-	foo="$(next)"; [[ ${foo} != "bar" ]] ... will force next() to run in a subshell, and
-	thus will not yield the desired results.
-	
-	After doing the above changes you can do this:
-	
+	The reason I chose to redirect output to ${output} is because trying something like:
+	foo="$(next)"; [[ ${foo} != "bar" ]] ... would force next() to run in a subshell, and thus would not yield the desired results.
+
+	Here are some usage examples:
+
 	alpha=("a" "b" "c" "d" "e" "f") # initiate array
 
-	next "${alpha[@]}" # first run outside of loop
-
 	for (( i = 0; i < ${#alpha[@]}; i++ )); do
-		if [[ "${output}" == "d" ]]; then
-			echo "Output is ${output}!"
-		else
-			echo -e "${output}"
-		fi
 
-		next
-	done
+	    if [[ -z ${run} ]]; then
+		next "${alpha[@]}"; run="1" # first iteration
+	    fi
+
+	    if [[ "${output}" == "d" ]]; then
+		echo "Output is ${output}!"
+	    else
+		echo -e "${output}"
+	    fi
+
+	    next
+	done; unset i run
 
 	You can also do this:
 	
 	alpha=("a" "b" "c" "d" "e" "f") # initiate array
 
-	next "${alpha[@]}"
-	echo "${output}"	# a
-	next
-	echo "${output}"	# b
-	next
-	echo "${output}"	# c
+	next "${alpha[@]}"; echo "${output}"	# a
+	next; echo "${output}"			# b
+	next; echo "${output}"			# c
 	...
 
 	Or even:
@@ -72,41 +69,9 @@ USAGE
 	next
 	echo "${output}"	# e
 
-	You could also do something a bit more complex such as:
+prev(array) => ${output}
 
-	alpha=("a" "b" "c" "d" "e" "f" "g" "h")
-	run="0"
-
-	for (( i = 0; i < ${#alpha[@]}; i++ )); do
-		for (( j = 0; j < ${#alpha[@]}; j++ )); do
-			if [[ ${run} == "0" ]]; then
-				next "${alpha[@]}"
-				echo -n "${output} "
-				run="1"
-			else
-				next
-				echo -n "${output} "
-			fi
-		done
-		next
-		echo ""
-	done
-
-	which would output:
-
-	a b c d e f g h 
-	b c d e f g h a 
-	c d e f g h a b 
-	d e f g h a b c 
-	e f g h a b c d 
-	f g h a b c d e 
-	g h a b c d e f 
-	h a b c d e f g
-
-prev(${array[@]})
-
-	For each function call, returns the previous element from input array and wraps to the end of array when
-	reaching the beginning.
+	For each function call, returns the previous element from input array and wraps to the end of array when reaching the beginning.
 
 	Uses five global variables: runcount1, runcount2, statenext, subscript, inputarray
 	- Globals are exchanged between prev() and next() functions
@@ -115,54 +80,52 @@ USAGE
 
 	alpha=("a" "b" "c" "d" "e" "f") # initiate array
 
-	prev "${alpha[@]}"  # a b c d e <f> (first run)
-	prev                # a b c d <e> f (prev)
-	prev                # a b c <d> e f (prev)
-	prev                # a b <c> d e f (prev)
-	prev                # a <b> c d e f (prev)
-	prev                # <a> b c d e f (prev)
-	prev                # a b c d e <f> (prev)
-	prev                # a b c d <e> f (prev)
-	prev                # a b c <d> e f (prev)
-	prev                # a b <c> d e f (prev)
-	next                # a b c <d> e f (next)
-	next                # a b c d <e> f (next)
-	next                # a b c d e <f> (next)
-	next                # <a> b c d e f (next)
-	prev                # a b c d e <f> (prev)
-	prev                # a b c d <e> f (prev)
+	prev "${alpha[@]}"; echo ${output} # a b c d e <f> (first run)
+	prev; echo ${output}               # a b c d <e> f (prev)
+	prev; echo ${output}               # a b c <d> e f (prev)
+	prev; echo ${output}               # a b <c> d e f (prev)
+	prev; echo ${output}               # a <b> c d e f (prev)
+	prev; echo ${output}               # <a> b c d e f (prev)
+	prev; echo ${output}               # a b c d e <f> (prev)
+	prev; echo ${output}               # a b c d <e> f (prev)
+	prev; echo ${output}               # a b c <d> e f (prev)
+	prev; echo ${output}               # a b <c> d e f (prev)
+	next; echo ${output}               # a b c <d> e f (next)
+	next; echo ${output}               # a b c d <e> f (next)
+	next; echo ${output}               # a b c d e <f> (next)
+	next; echo ${output}               # <a> b c d e f (next)
+	prev; echo ${output}               # a b c d e <f> (prev)
+	prev; echo ${output}               # a b c d <e> f (prev)
 
-	If you want to run tests against the output, you can change line 33 (echo -e ...) to:
-	output="${element}" instead. The reason for this is because trying something like:
-	foo="$(prev)"; [[ ${foo} != "bar" ]] ... will force prev() to run in a subshell, and
-	thus will not yield the desired results.
-	
-	After doing the above changes you can do this:
-	
+	The reason I chose to redirect output to ${output} is because trying something like:
+	foo="$(prev)"; [[ ${foo} != "bar" ]] ... would force prev() to run in a subshell, and thus would not yield the desired results.
+
+	Here are some usage examples:
+
 	alpha=("a" "b" "c" "d" "e" "f") # initiate array
 
-	prev "${alpha[@]}" # first run outside of loop
-
 	for (( i = 0; i < ${#alpha[@]}; i++ )); do
-		if [[ "${output}" == "d" ]]; then
-			echo "Output is ${output}!"
-		else
-			echo -e "${output}"
-		fi
 
-		prev
-	done
+	    if [[ -z ${run} ]]; then
+		prev "${alpha[@]}"; run="1" # first iteration
+	    fi
+
+	    if [[ "${output}" == "d" ]]; then
+		echo "Output is ${output}!"
+	    else
+		echo -e "${output}"
+	    fi
+
+	    prev
+	done; unset i run
 
 	You can also do this:
 	
 	alpha=("a" "b" "c" "d" "e" "f") # initiate array
 
-	prev "${alpha[@]}"
-	echo "${output}"	# f
-	prev
-	echo "${output}"	# e
-	prev
-	echo "${output}"	# d
+	prev "${alpha[@]}"; echo "${output}"	# f
+	prev; echo "${output}"			# e
+	prev; echo "${output}"			# d
 	...
 
 	Or even:
@@ -173,37 +136,6 @@ USAGE
 	prev
 	prev
 	echo "${output}"	# b
-
-	You could also do something a bit more complex such as:
-
-	alpha=("a" "b" "c" "d" "e" "f" "g" "h")
-	run="0"
-
-	for (( i = 0; i < ${#alpha[@]}; i++ )); do
-		for (( j = 0; j < ${#alpha[@]}; j++ )); do
-			if [[ ${run} == "0" ]]; then
-				prev "${alpha[@]}"
-				echo -n "${output} "
-				run="1"
-			else
-				prev
-				echo -n "${output} "
-			fi
-		done
-		prev
-		echo ""
-	done
-
-	which would output:
-
-	h g f e d c b a 
-	g f e d c b a h 
-	f e d c b a h g 
-	e d c b a h g f 
-	d c b a h g f e 
-	c b a h g f e d 
-	b a h g f e d c 
-	a h g f e d c b
 
 AUTHOR
 
