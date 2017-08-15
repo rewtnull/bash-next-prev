@@ -3,7 +3,8 @@ next() and prev() functions in bash inspired by the python .next() method
 
 next(array) => ${output}
 
-	For each function call, returns the next element from input array and wraps to the beginning of array when reaching the end.
+	For each function call, returns the next element from input array and wraps to the beginning of array
+	when reaching the end.
 
 	Uses five global variables: runcount1, runcount2, statenext, subscript, inputarray
 	- Globals are exchanged between next() and prev() functions
@@ -30,7 +31,8 @@ USAGE
 	next; echo "${output}"               # a <b> c d e f (next)
 
 	The reason I chose to redirect output to ${output} is because trying something like:
-	foo="$(next)"; [[ ${foo} != "bar" ]] ... would force next() to run in a subshell, and thus would not yield the desired results.
+	foo="$(next)"; [[ ${foo} != "bar" ]] ... would force next() to run in a subshell, and thus would
+	not yield the desired results.
 
 	Here are some usage examples:
 
@@ -71,7 +73,8 @@ USAGE
 
 prev(array) => ${output}
 
-	For each function call, returns the previous element from input array and wraps to the end of array when reaching the beginning.
+	For each function call, returns the previous element from input array and wraps to the end of array
+	when reaching the beginning.
 
 	Uses five global variables: runcount1, runcount2, statenext, subscript, inputarray
 	- Globals are exchanged between prev() and next() functions
@@ -98,7 +101,8 @@ USAGE
 	prev; echo ${output}               # a b c d <e> f (prev)
 
 	The reason I chose to redirect output to ${output} is because trying something like:
-	foo="$(prev)"; [[ ${foo} != "bar" ]] ... would force prev() to run in a subshell, and thus would not yield the desired results.
+	foo="$(prev)"; [[ ${foo} != "bar" ]] ... would force prev() to run in a subshell, and thus would
+	not yield the desired results.
 
 	Here are some usage examples:
 
